@@ -60,7 +60,6 @@ class BrowserClient extends BaseClient {
         completer.complete(new StreamedResponse(
             new ByteStream.fromBytes(body), xhr.status,
             contentLength: body.length,
-            request: request,
             headers: xhr.responseHeaders,
             reasonPhrase: xhr.statusText));
       });

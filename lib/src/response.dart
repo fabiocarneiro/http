@@ -8,7 +8,6 @@ import 'dart:typed_data';
 
 import 'package:http_parser/http_parser.dart';
 
-import 'base_request.dart';
 import 'base_response.dart';
 import 'streamed_response.dart';
 import 'utils.dart';
@@ -27,22 +26,21 @@ class Response extends BaseResponse {
   String get body => _encodingForHeaders(headers).decode(bodyBytes);
 
   /// Creates a new HTTP response with a string body.
-  Response(String body, int statusCode,
-      {BaseRequest request,
+  Response({String body, int statusCode,
       Map<String, String> headers: const {},
       bool isRedirect: false,
       bool persistentConnection: true,
       String reasonPhrase})
-      : this.bytes(_encodingForHeaders(headers).encode(body), statusCode,
-            request: request,
+      : this.bytes(_encodingForHeaders(headers).encode(body),
+            statusCode: statusCode,
             headers: headers,
             isRedirect: isRedirect,
             persistentConnection: persistentConnection,
             reasonPhrase: reasonPhrase);
 
   /// Create a new HTTP response with a byte array body.
-  Response.bytes(List<int> bodyBytes, int statusCode,
-      {BaseRequest request,
+  Response.bytes(List<int> bodyBytes,
+      {int statusCode,
       Map<String, String> headers: const {},
       bool isRedirect: false,
       bool persistentConnection: true,
@@ -50,7 +48,6 @@ class Response extends BaseResponse {
       : bodyBytes = toUint8List(bodyBytes),
         super(statusCode,
             contentLength: bodyBytes.length,
-            request: request,
             headers: headers,
             isRedirect: isRedirect,
             persistentConnection: persistentConnection,
@@ -60,8 +57,8 @@ class Response extends BaseResponse {
   /// available from a [StreamedResponse].
   static Future<Response> fromStream(StreamedResponse response) {
     return response.stream.toBytes().then((body) {
-      return new Response.bytes(body, response.statusCode,
-          request: response.request,
+      return new Response.bytes(body,
+          statusCode: response.statusCode,
           headers: response.headers,
           isRedirect: response.isRedirect,
           persistentConnection: response.persistentConnection,

@@ -2,15 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'base_request.dart';
-
 /// The base class for HTTP responses.
 ///
 /// Subclasses of [BaseResponse] are usually not constructed manually; instead,
 /// they're returned by [BaseClient.send] or other HTTP client methods.
 abstract class BaseResponse {
-  /// The (frozen) request that triggered this response.
-  final BaseRequest request;
 
   /// The status code of the response.
   final int statusCode;
@@ -38,7 +34,6 @@ abstract class BaseResponse {
   /// Creates a new HTTP response.
   BaseResponse(this.statusCode,
       {this.contentLength,
-      this.request,
       this.headers: const {},
       this.isRedirect: false,
       this.persistentConnection: true,

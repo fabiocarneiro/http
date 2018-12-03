@@ -117,7 +117,6 @@ abstract class BaseRequest {
       var stream = onDone(response.stream, client.close);
       return new StreamedResponse(new ByteStream(stream), response.statusCode,
           contentLength: response.contentLength,
-          request: response.request,
           headers: response.headers,
           isRedirect: response.isRedirect,
           persistentConnection: response.persistentConnection,

@@ -20,7 +20,6 @@ class StreamedResponse extends BaseResponse {
   /// stream.
   StreamedResponse(Stream<List<int>> stream, int statusCode,
       {int contentLength,
-      BaseRequest request,
       Map<String, String> headers: const {},
       bool isRedirect: false,
       bool persistentConnection: true,
@@ -28,7 +27,6 @@ class StreamedResponse extends BaseResponse {
       : this.stream = toByteStream(stream),
         super(statusCode,
             contentLength: contentLength,
-            request: request,
             headers: headers,
             isRedirect: isRedirect,
             persistentConnection: persistentConnection,

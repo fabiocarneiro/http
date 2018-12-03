@@ -15,8 +15,9 @@ void main() {
   test('handles a request', () {
     var client = new MockClient((request) {
       return new Future.value(new http.Response(
-          json.encode(request.bodyFields), 200,
-          request: request, headers: {'content-type': 'application/json'}));
+          body: json.encode(request.bodyFields),
+          statusCode: 200,
+          headers: {'content-type': 'application/json'}));
     });
 
     expect(
@@ -52,7 +53,7 @@ void main() {
 
   test('handles a request with no body', () {
     var client = new MockClient((request) {
-      return new Future.value(new http.Response('you did it', 200));
+      return new Future.value(new http.Response(body: 'you did it', statusCode: 200));
     });
 
     expect(client.read("http://example.com/foo"),

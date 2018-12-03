@@ -10,12 +10,12 @@ import 'package:test/test.dart';
 void main() {
   group('()', () {
     test('sets body', () {
-      var response = new http.Response("Hello, world!", 200);
+      var response = new http.Response(body: "Hello, world!", statusCode: 200);
       expect(response.body, equals("Hello, world!"));
     });
 
     test('sets bodyBytes', () {
-      var response = new http.Response("Hello, world!", 200);
+      var response = new http.Response(body: "Hello, world!", statusCode: 200);
       expect(
           response.bodyBytes,
           equals(
@@ -23,7 +23,7 @@ void main() {
     });
 
     test('respects the inferred encoding', () {
-      var response = new http.Response("föøbãr", 200,
+      var response = new http.Response(body: "föøbãr", statusCode: 200,
           headers: {'content-type': 'text/plain; charset=iso-8859-1'});
       expect(response.bodyBytes, equals([102, 246, 248, 98, 227, 114]));
     });
@@ -31,17 +31,17 @@ void main() {
 
   group('.bytes()', () {
     test('sets body', () {
-      var response = new http.Response.bytes([104, 101, 108, 108, 111], 200);
+      var response = new http.Response.bytes([104, 101, 108, 108, 111], statusCode: 200);
       expect(response.body, equals("hello"));
     });
 
     test('sets bodyBytes', () {
-      var response = new http.Response.bytes([104, 101, 108, 108, 111], 200);
+      var response = new http.Response.bytes([104, 101, 108, 108, 111], statusCode: 200);
       expect(response.bodyBytes, equals([104, 101, 108, 108, 111]));
     });
 
     test('respects the inferred encoding', () {
-      var response = new http.Response.bytes([102, 246, 248, 98, 227, 114], 200,
+      var response = new http.Response.bytes([102, 246, 248, 98, 227, 114], statusCode: 200,
           headers: {'content-type': 'text/plain; charset=iso-8859-1'});
       expect(response.body, equals("föøbãr"));
     });

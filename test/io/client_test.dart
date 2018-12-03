@@ -26,7 +26,6 @@ void main() {
 
           expect(
               client.send(request).then((response) {
-                expect(response.request, equals(request));
                 expect(response.statusCode, equals(200));
                 expect(response.headers['single'], equals('value'));
                 // dart:io internally normalizes outgoing headers so that they never
@@ -65,7 +64,6 @@ void main() {
 
           expect(
               client.send(request).then((response) {
-                expect(response.request, equals(request));
                 expect(response.statusCode, equals(200));
                 expect(response.headers['single'], equals('value'));
                 // dart:io internally normalizes outgoing headers so that they never

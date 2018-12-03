@@ -56,7 +56,6 @@ class IOClient extends BaseClient {
           response.statusCode,
           contentLength:
               response.contentLength == -1 ? null : response.contentLength,
-          request: request,
           headers: headers,
           isRedirect: response.isRedirect,
           persistentConnection: response.persistentConnection,
